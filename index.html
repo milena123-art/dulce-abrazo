@@ -1,0 +1,736 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DULCE ABRAZO - Mimos, Abrazos y Cariño</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+    <style>
+        /* Paleta de Colores Pastel:
+        - #FFDAB9 (Durazno claro)
+        - #B0E0E6 (Azul polvo)
+        - #F0FFF0 (Menta claro/Casi blanco)
+        - #E6E6FA (Lavanda claro)
+        - #FAFAD2 (Amarillo claro/Crema)
+        */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #F0FFF0; /* Fondo menta claro */
+            color: #333;
+            line-height: 1.6;
+        }
+
+        /* --- HEADER y NAVEGACIÓN --- */
+        header {
+            background-color: #FFDAB9; /* Durazno claro */
+            padding: 15px 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo {
+            font-size: 1.8em;
+            font-weight: bold;
+            color: #8A2BE2; /* Un toque de color vibrante (Lavanda oscuro) */
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: #333;
+            margin: 0 15px;
+            font-weight: 500;
+            padding: 5px 10px;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        nav ul li a:hover {
+            background-color: #FAFAD2; /* Amarillo claro */
+        }
+
+        .cart-icon {
+            font-size: 1.5em;
+            cursor: pointer;
+            position: relative;
+            color: #E67E22; /* Naranja para destacar */
+        }
+
+        #cart-count {
+            position: absolute;
+            top: -5px;
+            right: -10px;
+            background-color: #B0E0E6; /* Azul polvo */
+            color: #333;
+            border-radius: 50%;
+            padding: 2px 6px;
+            font-size: 0.6em;
+            font-weight: bold;
+        }
+
+        /* --- SECCIÓN HERO (Título y Subtítulo) --- */
+        .hero {
+            background-color: #B0E0E6; /* Azul polvo */
+            text-align: center;
+            padding: 80px 20px;
+            color: #333;
+            margin-bottom: 40px;
+        }
+
+        .hero h1 {
+            font-size: 3em;
+            margin-bottom: 10px;
+            color: #8A2BE2; /* Violeta */
+        }
+
+        .hero h2 {
+            font-size: 1.5em;
+            font-style: italic;
+            font-weight: normal;
+        }
+
+        /* --- SECCIÓN DE PRODUCTOS --- */
+        h3 {
+            font-size: 2em;
+            text-align: center;
+            margin-bottom: 30px;
+            color: #E67E22;
+        }
+
+        .productos-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            padding: 0 50px 50px;
+        }
+
+        .producto-card {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            text-align: center;
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .producto-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .producto-card img {
+            width: 100%;
+            max-height: 250px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 15px;
+        }
+
+        .producto-card h4 {
+            font-size: 1.5em;
+            color: #8A2BE2;
+            margin-bottom: 5px;
+        }
+
+        .descripcion {
+            font-size: 0.9em;
+            color: #555;
+            margin-bottom: 10px;
+            min-height: 40px;
+        }
+
+        .precio {
+            font-size: 1.3em;
+            font-weight: bold;
+            color: #E67E22;
+            margin-bottom: 15px;
+        }
+
+        .add-to-cart {
+            background-color: #B0E0E6; /* Azul polvo */
+            color: #333;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+
+        .add-to-cart:hover {
+            background-color: #FFDAB9; /* Durazno claro */
+        }
+
+        /* Estilo para destacar la promoción 2x1 */
+        .promo-2x1 {
+            border: 3px dashed #E6E6FA; /* Lavanda claro */
+            background-color: #FAFAD2;
+        }
+
+        /* --- SECCIÓN DE PROMOCIONES --- */
+        .promociones-section {
+            padding: 40px 50px;
+            text-align: center;
+        }
+
+        .promo-item {
+            background-color: #E6E6FA; /* Lavanda claro */
+            padding: 20px;
+            border-radius: 8px;
+            margin: 15px auto;
+            max-width: 600px;
+        }
+
+        .promo-item h4 {
+            color: #8A2BE2;
+            margin-bottom: 5px;
+        }
+
+        .precio-promo {
+            font-size: 1.2em;
+            color: #E67E22;
+            margin-top: 10px;
+        }
+
+        /* --- SECCIÓN CARRITO --- */
+        .carrito-container {
+            background-color: #FAFAD2; /* Amarillo claro/Crema */
+            padding: 40px 50px;
+            border-top: 5px solid #FFDAB9;
+        }
+
+        #cart-items p {
+            margin-bottom: 5px;
+            color: #555;
+        }
+
+        .cart-total {
+            display: flex;
+            justify-content: space-between;
+            font-size: 1.5em;
+            font-weight: bold;
+            margin-top: 20px;
+            padding-top: 10px;
+            border-top: 1px dashed #333;
+        }
+
+        .checkout-button {
+            width: 100%;
+            padding: 15px;
+            background-color: #E67E22; /* Naranja */
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 1.2em;
+            margin-top: 20px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .checkout-button:hover {
+            background-color: #D35400; /* Naranja más oscuro */
+        }
+/* Estilo para los items del carrito con el botón de eliminar */
+.cart-item-detail {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px 0;
+    border-bottom: 1px dotted #ccc;
+}
+
+.cart-item-detail p:first-child {
+    font-weight: bold;
+    color: #8A2BE2;
+}
+
+.remove-item {
+    background-color: #FFDAB9; /* Durazno claro */
+    color: #333;
+    border: 1px solid #E67E22;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 0.9em;
+    font-weight: bold;
+    line-height: 1;
+    padding: 0;
+    text-align: center;
+}
+        /* --- FORMULARIO DE ENVÍO --- */
+        .formulario-envio {
+            padding: 40px 50px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .formulario-envio form label {
+            display: block;
+            margin-top: 15px;
+            font-weight: bold;
+            color: #8A2BE2;
+        }
+
+        .formulario-envio form input {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: white;
+        }
+
+        .formulario-envio form button {
+            margin-top: 30px;
+            background-color: #B0E0E6;
+            border: none;
+            padding: 15px 30px;
+            font-size: 1.1em;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+        }
+
+        /* --- BIOGRAFÍA --- */
+        .biografia-empresa {
+            background-color: #FFDAB9;
+            padding: 40px 50px;
+            text-align: center;
+        }
+
+        .biografia-empresa p {
+            max-width: 800px;
+            margin: 20px auto 0;
+        }
+
+        /* --- FOOTER y CONTACTO --- */
+        footer {
+            background-color: #E6E6FA; /* Lavanda claro */
+            padding: 30px 50px 10px;
+        }
+
+        .footer-grid {
+            display: flex;
+            justify-content: space-around;
+            align-items: flex-start;
+            margin-bottom: 20px;
+        }
+
+        .contacto-info p {
+            margin: 5px 0;
+            color: #555;
+        }
+
+        .redes-sociales a {
+            font-size: 1.8em;
+            margin: 0 10px;
+            color: #E67E22;
+            transition: color 0.3s;
+        }
+
+        .redes-sociales a:hover {
+            color: #8A2BE2;
+        }
+
+        .copyright {
+            text-align: center;
+            font-size: 0.8em;
+            margin-top: 20px;
+            padding-top: 10px;
+            border-top: 1px solid #ccc;
+        }
+
+        /* --- CHAT FICTICIO (Flotante) --- */
+        .chat-ficticio {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #B0E0E6;
+            color: #333;
+            padding: 15px;
+            border-radius: 50px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+
+        .chat-ficticio:hover {
+            background-color: #FFDAB9;
+        }
+
+        .chat-ficticio i {
+            margin-right: 10px;
+            font-size: 1.2em;
+        }
+
+        /* Líneas divisorias */
+        hr {
+            border: 0;
+            height: 1px;
+            background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(176, 224, 230, 0.75), rgba(0, 0, 0, 0));
+            margin: 40px 0;
+        }
+
+        /* RESPONSIVE BÁSICO */
+        @media (max-width: 768px) {
+            header {
+                padding: 10px 20px;
+                flex-wrap: wrap;
+            }
+            nav {
+                order: 2;
+                width: 100%;
+                margin-top: 10px;
+            }
+            nav ul {
+                justify-content: space-around;
+            }
+            .hero {
+                padding: 50px 20px;
+            }
+            .productos-grid,
+            .promociones-section,
+            .carrito-container,
+            .formulario-envio,
+            .biografia-empresa {
+                padding: 20px;
+            }
+            .footer-grid {
+                flex-direction: column;
+                text-align: center;
+            }
+            .contacto-info, .redes-sociales {
+                margin-bottom: 20px;
+            }
+        }
+        /* --- VENTANA DE CHAT COMPLETA (NUEVO) --- */
+.chat-window {
+    position: fixed;
+    bottom: 80px; /* Arriba del botón flotante */
+    right: 20px;
+    width: 300px;
+    height: 400px;
+    background-color: white;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    z-index: 1002;
+    display: none; /* INICIALMENTE OCULTO */
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.chat-header {
+    background-color: #B0E0E6; /* Azul polvo */
+    color: #333;
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: bold;
+}
+
+.chat-header button {
+    background: none;
+    border: none;
+    font-size: 1.2em;
+    cursor: pointer;
+    font-weight: bold;
+    color: #333;
+}
+
+.chat-body {
+    padding: 15px;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+}
+
+.chat-body p {
+    background-color: #FAFAD2; /* Amarillo claro */
+    padding: 10px;
+    border-radius: 10px;
+    margin-bottom: 15px;
+    max-width: 80%;
+    align-self: flex-start;
+}
+
+.chat-body input {
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+.chat-body button {
+    background-color: #E67E22;
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+/* ESTILO ADICIONAL PARA CARRITO MÁS LIMPIO */
+.cart-item-detail {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px 0;
+    border-bottom: 1px dotted #ccc;
+}
+.cart-item-detail p:first-child {
+    font-weight: bold;
+    color: #8A2BE2;
+}
+.remove-item {
+    background-color: #FFDAB9; 
+    color: #333;
+    border: 1px solid #E67E22;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 0.9em;
+    font-weight: bold;
+    line-height: 1;
+    padding: 0;
+    text-align: center;
+}
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo-container">
+            <div class="logo">🧸 DULCE ABRAZO</div>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="#productos">Productos</a></li>
+                <li><a href="#promociones">Promociones</a></li>
+                <li><a href="#nosotros">Nosotros</a></li>
+                <li><a href="#contacto">Contacto</a></li>
+            </ul>
+        </nav>
+        <div class="cart-icon">
+            <i class="fas fa-shopping-cart"></i>
+            <span id="cart-count">0</span>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero">
+            <h1>DULCE ABRAZO</h1>
+            <h2>MIMOS, ABRAZOS Y CARIÑO</h2>
+        </section>
+
+        <section id="productos" class="productos-grid">
+            <h3>✨ Nuestros Peluches</h3>
+            <div class="producto-card">
+                <img src="peluche_oso.webp" alt="Oso de peluche clásico">
+                <h4>Oso Abrazador</h4>
+                <p class="descripcion">Un clásico suave de 40cm, ideal para cualquier edad. Pelo hipoalergénico.</p>
+                <p class="precio">$8.500 ARS</p>
+                <button class="add-to-cart" data-precio="8500">Añadir al Carrito</button>
+            </div>
+
+             <div class="producto-card">
+                <img src="peluche_stich.jpg" alt="peluche de stich">
+                <h4>Stich Abrazador</h4>
+                <p class="descripcion">Un clásico suave de 40cm, ideal para cualquier edad. Pelo hipoalergénico.</p>
+                <p class="precio">$10.500 ARS</p>
+                <button class="add-to-cart" data-precio="10500">Añadir al Carrito</button>
+            </div>
+
+            <div class="producto-card">
+                <img src="peluche_unicornio.webp" alt="Unicornio de peluche">
+                <h4>Unicornio Mágico</h4>
+                <p class="descripcion">Con cuerno brillante y crin de colores pastel. ¡Perfecto para soñar!</p>
+                <p class="precio">$12.900 ARS</p>
+                <button class="add-to-cart" data-precio="12900">Añadir al Carrito</button>
+            </div>
+
+            <div class="producto-card">
+                <img src="peluche_disney.jfif" alt="peluches disney">
+                <h4>Peluches Disney</h4>
+                <p class="descripcion">4 mini peluches de personajes disney ¡Perfectos para soñar!</p>
+                <p class="precio">$15.000 ARS</p>
+                <button class="add-to-cart" data-precio="15000">Añadir al Carrito</button>
+            </div>
+
+            <div class="producto-card">
+                <img src="peluche_perro.jfif" alt="Perro de peluche">
+                <h4>Perrito Fiel</h4>
+                <p class="descripcion">Mirada tierna y orejas caídas. Tu compañero ideal para ver películas.</p>
+                <p class="precio">$7.250 ARS</p>
+                <button class="add-to-cart" data-precio="7250">Añadir al Carrito</button>
+            </div>
+            
+             <div class="producto-card">
+                <img src="peluche_ajolotep.jpg" alt="Ajolote Pequeño">
+                <h4>Ajolote Pequeño</h4>
+                    <p class="descripcion">Mirada tierna y suave para abrazar ¡Tu compañero ideal para ver películas!</p>
+                <p class="precio">$9.800 ARS</p>
+                <button class="add-to-cart" data-precio="9800">Añadir al Carrito</button>
+            </div>
+
+            <div class="producto-card promo-2x1">
+                <img src="peluche_dinosaurio.webp" alt="Dinosaurio de peluche">
+                <h4>Dino Amigable 🦖</h4>
+                <p class="descripcion">Peluches de dinosaurios en colores divertidos. **¡Aprovecha el 2x1!**</p>
+                <p class="precio">$15.000 ARS</p>
+                <button class="add-to-cart" data-precio="15000">Añadir al Carrito</button>
+            </div>
+
+             <div class="producto-card promo gigante">
+                <img src="peluche_ajoloteg.jfif" alt="Ajolote grande">
+                <h4>Ajolote Gigante</h4>
+                <p class="descripcion">peluche de ajolote abrazable ¡aprobecha la promo!</p>
+                <p class="precio">$20.000 ARS</p>
+                <button class="add-to-cart" data-precio="20000">Añadir al Carrito</button>
+            </div>
+        </section>
+
+        <hr>
+
+        <section id="promociones" class="promociones-section">
+            <h3>🎁 Promociones Especiales</h3>
+            <div class="promo-item combo">
+                <h4>Combo Familiar</h4>
+                <p>3 Peluches grandes por el precio de 2. ¡La ternura nunca es suficiente!</p>
+                <img src="peluche_gigante" alt="peluche grande">
+                <p class="precio-promo">Precio Combo:$25.000 ARS</p>
+                <button class="add-to-cart" data-precio="25000">Añadir al Carrito</button>
+            </div>
+            <div class="promo-item dos-por-uno">
+                <h4>2x1 en Peluches Pequeños</h4>
+                 <img src="peluche_pequeño" alt="peluche pequeño">
+                <p>Llevá dos mini-peluches y pagá solo uno. ¡Ideal para regalar!</p>
+                <p class="precio-promo">Precio Combo:$15.500 ARS</p>
+                <button class="add-to-cart" data-precio="15500">Añadir al Carrito</button>
+            </div>
+        </section>
+
+        <hr>
+
+        <section id="carrito" class="carrito-container">
+            <h3>🛒 Carrito de Compras</h3>
+            <div id="cart-items">
+                <p>Tu carrito está vacío.</p>
+            </div>
+            <div class="cart-total">
+                <p>Total a pagar:</p>
+                <p id="total-price">$0 ARS</p>
+            </div>
+            <button class="checkout-button">Finalizar Compra</button>
+        </section>
+
+        <hr>
+
+        <section id="envio" class="formulario-envio">
+            <h3>🚚 Formulario de Envío</h3>
+            <form>
+                <label for="nombre">Nombre Completo:</label>
+                <input type="text" id="nombre" required>
+
+                <label for="email">E-mail:</label>
+                <input type="email" id="email" required>
+
+                <label for="direccion">Dirección:</label>
+                <input type="text" id="direccion" required>
+
+                <label for="ciudad">Ciudad:</label>
+                <input type="text" id="ciudad" required>
+
+                <label for="provincia">Provincia:</label>
+                <input type="text" id="provincia" required>
+
+                <button type="submit">Confirmar Pedido</button>
+            </form>
+        </section>
+        
+        <hr>
+
+        <section id="nosotros" class="biografia-empresa">
+            <h3>💖 Nuestra Biografía</h3>
+            <p>DULCE ABRAZO nació en 2023 con la misión de llevar mimos, abrazos y cariño a cada hogar argentino. Creemos que un peluche es más que un juguete; es un compañero que evoca felicidad y consuelo. Todos nuestros productos están hechos con materiales de la más alta calidad, son hipoalergénicos y fabricados con mucho amor en Argentina.</p>
+        </section>
+    </main>
+
+    <footer>
+        <section id="contacto" class="footer-grid">
+            <div class="contacto-info">
+                <h4>📞 Contacto</h4>
+                <p><i class="fas fa-envelope"></i> Email: contacto@dulceabrazo.com.ar</p>
+                <p><i class="fas fa-phone"></i> Teléfono: (011) 1234-5678</p>
+                <p><i class="fas fa-map-marker-alt"></i> Dirección: Av. Siempre Viva 742, CABA</p>
+            </div>
+
+            <div class="redes-sociales">
+                <h4>📱 Redes Sociales</h4>
+                <a href="#" target="_blank"><i class="fab fa-instagram"></i></a>
+            </div>
+        </section>
+        <p class="copyright">© 2025 DULCE ABRAZO. Todos los derechos reservados.</p>
+        <div class="chat-window" id="chatWindow">
+        <div class="chat-header">
+            <h4>Chat de Ayuda Dulce Abrazo</h4>
+            <button id="closeChat">X</button>
+        </div>
+        <div class="chat-body">
+            <p>¡Hola! ¿En qué podemos ayudarte con tu compra?</p>
+            <input type="text" placeholder="Escribe tu mensaje...">
+            <button>Enviar</button>
+        </div>
+    </div>
+
+    <div class="chat-window" id="chatWindow">
+        <div class="chat-header">
+            <h4>Chat de Ayuda Dulce Abrazo</h4>
+            <button id="closeChat">X</button>
+        </div>
+        <div class="chat-body">
+            <p>¡Hola! ¿En qué podemos ayudarte con tu compra?</p>
+            <input type="text" placeholder="Escribe tu mensaje...">
+            <button>Enviar</button>
+        </div>
+    </div>
+
+    <div class="chat-ficticio">
+        <i class="fas fa-comment-dots"></i>
+        <span>Chat en Vivo</span>
+    </div>
+
+    </footer>
+
+    <div class="chat-ficticio">
+        <i class="fas fa-comment-dots"></i>
+        <span>Chat en Vivo</span>
+    </div>
+
+    <script src="script.js"></script>
+
+</body>
+</html>
